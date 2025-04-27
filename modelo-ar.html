@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <title>Modelo AR de la Vela</title>
+</head>
+<body>
+    <nav>
+        <img src="Img/Logo.jpg" alt="Logo">
+    </nav>
+    <h1>Modelo AR</h1>
+    <model-viewer 
+        alt="Vela 3D" 
+        auto-rotate 
+        camera-controls>
+    </model-viewer>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const vela = urlParams.get('vela');
+        console.log("Vela seleccionada:", vela); // Verifica el parámetro de la URL
+        const modelViewer = document.querySelector('model-viewer');
+        
+        // Verifica que el modelo se esté seleccionando correctamente
+        if (modelViewer && vela) {
+            modelViewer.setAttribute('src', `Modelos/${vela}.glb`);
+        } else {
+            console.error("No se ha encontrado el modelo o el elemento model-viewer");
+        }
+    </script>
+</body>
+</html>
+
