@@ -80,9 +80,15 @@ color: rgb(135, 16, 10);;
    
 }
 
+h1{
+    font-family: "Montserrat", sans-serif;
+    color: rgb(27, 27, 27);
+}
+
 .vela p {
     margin-top: 10px;
     font-weight: bold;
+    font-family: "Montserrat", sans-serif;
 }
 
 .vela p:hover {
