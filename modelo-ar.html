@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="modelo.css">
     <title>Modelo AR de la Vela</title>
 </head>
@@ -14,22 +14,50 @@
     <nav>
         <img src="Img/Logo.jpg" alt="Logo">
     </nav>
+    
     <h1>Vela interactiva</h1>
+    
     <model-viewer 
+        id="modelViewer"
         alt="Vela 3D" 
         auto-rotate 
-        camera-controls>
+        camera-controls 
+        ar 
+        ar-modes="scene-viewer webxr quick-look" 
+        shadow-intensity="1"
+        style="width: 100%; height: 60vh;">
+        
+        <!-- Botón para ver en tu espacio -->
+        <button slot="ar-button" style="
+            background-color: #87100A;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Montserrat', sans-serif;
+        ">
+            Ver en tu espacio
+        </button>
+        
     </model-viewer>
-    
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const vela = urlParams.get('vela');
         console.log("Vela seleccionada:", vela); // Verifica el parámetro de la URL
-        const modelViewer = document.querySelector('model-viewer');
+        const modelViewer = document.getElementById('modelViewer');
         
         // Verifica que el modelo se esté seleccionando correctamente
         if (modelViewer && vela) {
             modelViewer.setAttribute('src', `Modelos/${vela}.glb`);
+            // Opcionalmente podrías agregar el .usdz para iPhone aquí si tienes uno
+            modelViewer.setAttribute('ios-src', `Modelos/${vela}.usdz`);
         } else {
             console.error("No se ha encontrado el modelo o el elemento model-viewer");
         }
